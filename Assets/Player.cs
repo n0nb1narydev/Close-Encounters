@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    CharacterController _controller;
     public float _speed = 10f;
 
 
     void Awake()
     {
-        _controller = GetComponent<CharacterController>();
     }
 
 
