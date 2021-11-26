@@ -5,7 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float _speed = 10f;
+    public bool canMove = true;
+    public bool isAbducting = false;
 
+    public GameObject abductionLight;
 
     void Awake()
     {
@@ -14,7 +17,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CalculateMovement();
+        if(canMove)
+        {
+            CalculateMovement();
+        }
+        if(isAbducting)
+        {
+            StartCoroutine(Abducting());
+        }
     }
 
     void CalculateMovement()
@@ -27,6 +37,14 @@ public class Player : MonoBehaviour
 
         transform.Translate(direction * _speed * Time.deltaTime);
 
+    }
+
+    private IEnumerator Abducting()
+    {
+        abductionLight.SetActive(true);
+        yield return new WaitForSeconds(13f);
+        abductionLight.SetActive(false);
+        isAbducting = false;
     }
 
 }
