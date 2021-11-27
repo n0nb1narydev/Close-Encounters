@@ -10,8 +10,11 @@ public class Player : MonoBehaviour
 
     public GameObject abductionLight;
 
+
+
     void Awake()
     {
+     
     }
 
 
@@ -21,10 +24,10 @@ public class Player : MonoBehaviour
         {
             CalculateMovement();
         }
-        if(isAbducting)
-        {
-            StartCoroutine(Abducting());
-        }
+        //if(isAbducting)
+        //{
+        //    StartCoroutine(Abducting());
+        //}
     }
 
     void CalculateMovement()
@@ -43,8 +46,17 @@ public class Player : MonoBehaviour
     {
         abductionLight.SetActive(true);
         yield return new WaitForSeconds(13f);
+        canMove = true;
         abductionLight.SetActive(false);
         isAbducting = false;
+    }
+
+    public void Abduct()
+    {
+        StartCoroutine(Abducting());
+        print("button pressed");
+        isAbducting = true;
+        canMove = false;
     }
 
 }

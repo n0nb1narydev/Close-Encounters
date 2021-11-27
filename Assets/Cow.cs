@@ -6,7 +6,7 @@ public class Cow : MonoBehaviour
 {
     public GameObject abductCow;
     public float _speed = 4f;
-    private bool isAbducted = false;
+    public bool isAbducted = false;
 
     private Player player;
 
@@ -31,11 +31,16 @@ public class Cow : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
             abductCow.SetActive(true);
+            if(player.isAbducting)
+            {
+                abductCow.SetActive(false);
+                isAbducted = true;
+            }
         }
     }
 
@@ -44,11 +49,4 @@ public class Cow : MonoBehaviour
         abductCow.SetActive(false);
     }
 
-    public void Abduct()
-    {
-        player.isAbducting = true;
-        isAbducted = true;
-        player.canMove = false;
-        abductCow.SetActive(false);
-    }
 }
