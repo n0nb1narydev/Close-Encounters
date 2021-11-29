@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
     public void Abduct()
     {
         StartCoroutine(Abducting());
-        print("button pressed");
         isAbducting = true;
         canMove = false;
     }
