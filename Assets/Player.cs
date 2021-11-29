@@ -7,8 +7,12 @@ public class Player : MonoBehaviour
     public float _speed = 10f;
     public bool canMove = true;
     public bool isAbducting = false;
+    public bool isDrawing = false;
+    public bool isBuilding = false;
 
     public GameObject abductionLight;
+    public GameObject drawingLight;
+    public GameObject buildLight;
 
 
 
@@ -24,10 +28,6 @@ public class Player : MonoBehaviour
         {
             CalculateMovement();
         }
-        //if(isAbducting)
-        //{
-        //    StartCoroutine(Abducting());
-        //}
     }
 
     void CalculateMovement()
@@ -59,4 +59,34 @@ public class Player : MonoBehaviour
         canMove = false;
     }
 
+    private IEnumerator Drawing()
+    {
+        isDrawing = true;
+        drawingLight.SetActive(true);
+        canMove = false;
+        yield return new WaitForSeconds(3f);
+        canMove = true;
+        drawingLight.SetActive(false);
+        isDrawing = false;
+    }
+
+    public void Draw()
+    {
+        StartCoroutine(Drawing());
+    }
+
+    private IEnumerator Building()
+    {
+        isBuilding = true;
+        canMove = false;
+        buildLight.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        canMove = true;
+        buildLight.SetActive(false);
+        isBuilding = false;
+    }
+    public void Build()
+    {
+        StartCoroutine(Building());
+    }
 }
